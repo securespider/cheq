@@ -9,7 +9,7 @@ if (!WALLETCONNECT_PROJECT_ID) {
 }
 
 export const WALLETCONNECT_CONFIG = defaultWagmiConfig({
-  projectId: '55d75c54c9473dfc84038c7922ac2d9a',
+  projectId: WALLETCONNECT_PROJECT_ID,
   chains: ETH_CHAINS,
   metadata: {
     name: SITE_NAME,
