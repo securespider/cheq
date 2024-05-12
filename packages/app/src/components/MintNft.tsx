@@ -4,7 +4,7 @@ import {
   useWaitForTransactionReceipt, 
   useWriteContract 
 } from 'wagmi'
-import { testabi } from '@/abi'
+import { abi } from '@/abi'
 
  
 export function MintNFT() {
@@ -22,7 +22,7 @@ export function MintNFT() {
     console.log(barcode)
     writeContract({
       address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-      testabi,
+      abi,
       functionName: 'mint',
       args: [BigInt(barcode)],
     })
