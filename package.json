@@ -12,6 +12,7 @@
     "test": "yarn workspaces -pt run test"
   },
   "dependencies": {
+    "react": "^18.2.0",
     "yarn": "^1.22.22"
   }
 }

@@ -22,4 +22,10 @@ export const EXAMPLE_ITEMS = [
     image: NotificationIcon.src,
     url: '/examples/notifications',
   },
+  {
+    title: 'testing',
+    description: 'Testing code to learn - Ryan',
+    image: EtherIcon.src,
+    url: '/examples/testing_api'
+  }
 ]
