@@ -22,4 +22,9 @@ export const EXAMPLE_ITEMS = [
     image: NotificationIcon.src,
     url: '/examples/notifications',
   },
+  {
+    title:"Mint NFT",
+    description: 'This is a text page to mint NFT',
+    url:'/examples/nft',
+  }
 ]
