@@ -27,5 +27,10 @@ export const EXAMPLE_ITEMS = [
     description: 'Testing code to learn - Ryan',
     image: EtherIcon.src,
     url: '/examples/testing_api'
+  },
+  {
+    title:"Mint NFT",
+    description: 'This is a text page to mint NFT',
+    url:'/examples/nft',
   }
 ]
