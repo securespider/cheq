@@ -44,6 +44,7 @@ export function MintNFT() {
       <button 
         disabled={isPending} 
         type="submit"
+        className='btn btn-sm btn-info'
       >
         {isPending ? 'Confirming...' : 'Mint'} 
       </button>
