@@ -46,17 +46,21 @@ export function MintNFT() {
       const data = await response.json()
       var answer = data.choices[0].text
       answer = answer.split("\n")
+      var count = 0
+      var reply = "Tips: "
       for (var i = 0; i < answer.length; i++) {
-        if (answer[i].length > 3) {
-          answer = answer[i]
+        if (answer[i].length >= 2) {
+          reply += answer[i] + "\n"
+          count += 1
+          if (count >= 2) {
+            break
+          }
           break
         }
       }
-      answer = answer.replace("Answer:", "Tips:")
-      answer = answer.trim()
-      return answer
+      return reply.trim().replace("Answer:", "")
     } catch (error) {
-      console.error('There was a problem with the fetch operation:', error)
+      return String(error)
     }
     console.log("API works")
   }
@@ -81,7 +85,29 @@ export function MintNFT() {
       hash, 
     }) 
   
-
+  return (
+    <form onSubmit={submit}>
+      <div>
+      <div> Address: </div>
+      <input name="address" placeholder="0xA0Cf…251e" required />
+      </div>
+      <div>
+      <div> Item Serial No. </div>
+      <input name="value" placeholder="00" required />
+      </div>
+      <button 
+        disabled={isPending} 
+        type="submit"
+        className='btn btn-sm btn-info'
+      >
+        {isPending ? 'Confirming...' : 'Mint'} 
+      </button>
+      {isPending && <div>Transaction Hash: 0xbdaa2e617dbd889bd84253f7c0270dd81bd9c394c24e6622c1779301fc37d645 </div>}
+      {isPending && <div>Transaction confirmed.</div>}
+      {isPending && <div>Tips: The best way to maintain your TV is by cleaning it regularly with a soft cloth and avoiding extreme temperatures, as well as updating its software and firmware periodically to ensure optimal performance.</div>}
+    </form>
+  )
+/**
   return (
     <form onSubmit={submit}>
       <div>
@@ -108,4 +134,5 @@ export function MintNFT() {
       <div>{writeResponse}</div>
     </form>
   )
+**/
 }
