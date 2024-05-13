@@ -6,7 +6,6 @@ import {
 } from 'wagmi'
 import { abi } from '@/abi'
 
- 
 export function MintNFT() {
   const { 
     data: hash,
@@ -14,6 +13,53 @@ export function MintNFT() {
     isPending, 
     writeContract 
   } = useWriteContract() 
+
+  const [writeResponse, setWriteResponse] = React.useState<string>("")
+
+  const handleClick = async (serial) => {
+    var item = "car"
+    if (serial.startsWith("1")) {
+        item = "tv"
+    } else if (serial.startsWith("2")) {
+        item = "ball"
+    } else if (serial.startsWith("3")) {
+        item = "book"
+    }
+    const prompt = "Give a one line answer to 'How to maintain a " + item + "'"
+    try {
+      const response = await fetch('https://api.awanllm.com/v1/completions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer b489c233-3af5-4ccd-9980-5c904d8d51b7`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'Meta-Llama-3-8B-Instruct',
+          prompt: prompt,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      const data = await response.json()
+      var answer = data.choices[0].text
+      answer = answer.split("\n")
+      for (var i = 0; i < answer.length; i++) {
+        if (answer[i].length > 3) {
+          answer = answer[i]
+          break
+        }
+      }
+      answer = answer.replace("Answer:", "Tips:")
+      answer = answer.trim()
+      return answer
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error)
+    }
+    console.log("API works")
+  }
 
   async function submit(e: React.FormEvent<HTMLFormElement>) { 
     e.preventDefault() 
@@ -26,20 +72,25 @@ export function MintNFT() {
       functionName: 'mint',
       args: [BigInt(barcode)],
     })
+    setWriteResponse(handleClick(barcode))
+
   } 
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = 
     useWaitForTransactionReceipt({ 
       hash, 
     }) 
+  
 
   return (
     <form onSubmit={submit}>
       <div>
+      <div> Address: </div>
       <input name="address" placeholder="0xA0Cf…251e" required />
       </div>
       <div>
-      <input name="value" placeholder="0.05" required />
+      <div> Item Serial No. </div>
+      <input name="value" placeholder="00" required />
       </div>
       <button 
         disabled={isPending} 
@@ -54,6 +105,7 @@ export function MintNFT() {
       {error && ( 
         <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
       )} 
+      <div>{writeResponse}</div>
     </form>
   )
 }
