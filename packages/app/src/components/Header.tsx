@@ -11,6 +11,9 @@ export function Header() {
         <h1 className='text-xl font-bold'>{SITE_EMOJI}</h1>
       </LinkComponent>
 
+      <LinkComponent href='/profile'>
+        <h1 className='text-xl font-bold'>Profile</h1>
+      </LinkComponent>
       <div className='flex gap-2'>
         <Connect />
         <NotificationsDrawer />
