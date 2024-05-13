@@ -102,29 +102,6 @@ export function MintNFT() {
       >
         {isPending ? 'Confirming...' : 'Mint'} 
       </button>
-      {isPending && <div>Transaction Hash: 0xbdaa2e617dbd889bd84253f7c0270dd81bd9c394c24e6622c1779301fc37d645 </div>}
-      {isPending && <div>Transaction confirmed.</div>}
-      {isPending && <div>Tips: The best way to maintain your TV is by cleaning it regularly with a soft cloth and avoiding extreme temperatures, as well as updating its software and firmware periodically to ensure optimal performance.</div>}
-    </form>
-  )
-/**
-  return (
-    <form onSubmit={submit}>
-      <div>
-      <div> Address: </div>
-      <input name="address" placeholder="0xA0Cf…251e" required />
-      </div>
-      <div>
-      <div> Item Serial No. </div>
-      <input name="value" placeholder="00" required />
-      </div>
-      <button 
-        disabled={isPending} 
-        type="submit"
-        className='btn btn-sm btn-info'
-      >
-        {isPending ? 'Confirming...' : 'Mint'} 
-      </button>
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && <div>Waiting for confirmation...</div>} 
       {isConfirmed && <div>Transaction confirmed.</div>} 
@@ -134,5 +111,4 @@ export function MintNFT() {
       <div>{writeResponse}</div>
     </form>
   )
-**/
 }
